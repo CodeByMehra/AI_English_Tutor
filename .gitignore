@@ -1,0 +1,39 @@
+# -----------------------------------
+# Secrets and API Keys (CRITICAL)
+# -----------------------------------
+.env
+.env.*
+*.pem
+secrets.json
+
+# -----------------------------------
+# Python Cache & Bytecode
+# -----------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# -----------------------------------
+# Audio & Media Files 
+# (For when you add Speech-to-Text)
+# -----------------------------------
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.ogg
+
+# -----------------------------------
+# Generated Reports / Logs
+# -----------------------------------
+*.log
+# If you don't want to commit the tutor's generated feedback reports, 
+# uncomment the line below:
+# reports/
+
+# -----------------------------------
+# IDE & OS Files
+# -----------------------------------
+.vscode/
+.DS_Store
+Thumbs.db
