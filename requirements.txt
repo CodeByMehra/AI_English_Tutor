@@ -1,0 +1,17 @@
+# utilities
+numpy
+pandas
+
+# Backend
+fastapi
+uvicorn
+
+#Data validation and serialization.
+pydantic
+
+
+# Authentication
+passlib
+bcrypt
+
+streamlit
