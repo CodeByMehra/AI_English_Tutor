@@ -1,3 +1,19 @@
+# --- Frontend & UI ---
+streamlit>=1.36.0         # Includes the native st.audio_input widget for mic recording
+
+# --- AI & Model Orchestration ---
+google-genai>=0.1.0       # Official SDK for Gemini (LLM & Evaluation)
+groq>=0.4.0               # For ultra-fast Whisper speech-to-text API
+
+# --- Database & Authentication ---
+supabase>=2.3.0           # Database client & Auth for saving reports/records
+
+# --- Audio Utilities ---
+pydub>=0.25.1             # For audio file manipulation before sending to Groq
+
+# --- Environment & Configuration ---
+python-dotenv>=1.0.1
+
 # utilities
 numpy
 pandas
@@ -13,5 +29,3 @@ pydantic
 # Authentication
 passlib
 bcrypt
-
-streamlit
