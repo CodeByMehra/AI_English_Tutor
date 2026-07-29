@@ -1,4 +1,4 @@
-# File for stramlit
+# File for streamlit
 import streamlit as st
 
 def main():
