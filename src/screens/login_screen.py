@@ -13,4 +13,4 @@ def login_screen():
         st.text_input("Enter Password")
         
         st.text("Dont have an account?")
-        st.button("Sign up")
+        st.button("Sign up") 
