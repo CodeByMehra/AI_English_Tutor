@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def login_screen():
-    col1, col2 = st.columns 
+    col1, col2 = st.columns(2)
 
     with col1:
         st.image
@@ -13,4 +13,4 @@ def login_screen():
         st.text_input("Enter Password")
         
         st.text("Dont have an account?")
-        st.link_button("Sign up")
+        st.button("Sign up")
