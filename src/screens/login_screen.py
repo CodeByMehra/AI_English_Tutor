@@ -3,10 +3,10 @@ from src.components.dialog_signup import signup_dialog
 
 
 def login_screen():
-    if "signup" not in st.session_state.screen:
-        st.session_state.screen = "signup"
+    if "login" not in st.session_state.screen:
+        st.session_state.screen = "login"
         
-    if st.session_state.screen == "signup":
+    if st.session_state.screen == "login":
         
         col1, col2 = st.columns(2)
 
@@ -20,7 +20,7 @@ def login_screen():
             
             st.text("Dont have an account?")
             if st.button("Sign up") :
-                st.session_state.screens = "signudialog"
+                st.session_state.screen = "signup"
                 
-    elif st.session_state.screen == "signupdialog":
+    elif st.session_state.screen == "signup":
         signup_dialog()
