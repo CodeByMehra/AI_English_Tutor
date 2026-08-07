@@ -1,5 +1,5 @@
 import streamlit as st
-from src.dialogs.dialog_signup import signup_dialog
+from src.components.dialog_signup import signup_dialog
 
 
 def login_screen():
