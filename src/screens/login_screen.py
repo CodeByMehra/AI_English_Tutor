@@ -1,4 +1,5 @@
 import streamlit as st
+from src.dialogs.dialog_signup import signup_dialog
 
 
 def login_screen():
@@ -13,4 +14,5 @@ def login_screen():
         st.text_input("Enter Password")
         
         st.text("Dont have an account?")
-        st.button("Sign up") 
+        if st.button("Sign up") :
+            signup_dialog()
