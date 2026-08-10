@@ -1,6 +1,7 @@
 # File for streamlit
 import streamlit as st
 from src.screens.login_screen import login_screen
+from src.components.dialog_signup import signup_dialog
 
 def main():
    
@@ -16,5 +17,7 @@ def main():
 
     elif st.session_state.screen == "login":
         login_screen()
+    elif st.session_state.screen == "signup":
+        signup_dialog()
         
 main()
