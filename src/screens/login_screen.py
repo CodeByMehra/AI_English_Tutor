@@ -21,6 +21,5 @@ def login_screen():
             st.text("Dont have an account?")
             if st.button("Sign up") :
                 st.session_state.screen = "signup"
-                
-    elif st.session_state.screen == "signup":
-        signup_dialog()
+                st.rerun()
+        
