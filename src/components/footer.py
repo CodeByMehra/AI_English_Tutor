@@ -20,4 +20,4 @@ def footer_dashboard():
         <p style="font-weight:bold; color:black;"> Created by Vishal Mehra</p>  
         </div>
                 
-                """, unsafe_allow_html=True) 
+                """, unsafe_allow_html=True)
