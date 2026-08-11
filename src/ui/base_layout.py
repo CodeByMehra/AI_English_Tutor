@@ -31,7 +31,6 @@ def style_base_layout():
         </style>
     """, unsafe_allow_html=True)
     
-    
 
 def style_background_home():
      st.markdown("""
