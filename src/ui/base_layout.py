@@ -1,5 +1,13 @@
 import streamlit as st
 
+
+def style_base_layout():
+    st.markdown("""
+        <style>
+        #MainMenu, footer, header { visibility: hidden; }
+        </style>
+    """, unsafe_allow_html=True)
+
 def style_background_home():
      st.markdown("""
         <style>
@@ -10,5 +18,3 @@ def style_background_home():
 def style_background_dashboard():
     pass
 
-def style_base_layout():
-    pass

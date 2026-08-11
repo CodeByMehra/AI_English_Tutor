@@ -3,10 +3,11 @@ import streamlit as st
 from src.screens.login_screen import login_screen
 from src.components.dialog_signup import signup_dialog
 
-from src.ui.base_layout import style_background_home
+from src.ui.base_layout import style_background_home ,  style_base_layout
 
 def main():
     style_background_home()
+    style_base_layout()
    
     if "screen" not in st.session_state:
         st.session_state.screen = "start"
