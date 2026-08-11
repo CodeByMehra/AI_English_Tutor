@@ -1,7 +1,7 @@
 import streamlit as st
 
 def header_home():
-    logo_url = "Link Here"
+    logo_url = "https://i.ibb.co/0jpP8MjJ/Speak-Wise-Logo-front.png"
     st.markdown(f"""
         <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:30px; margin-top:30px">
             <img src="{logo_url}" style="height:100px; border-radius:15px;">
@@ -12,7 +12,7 @@ def header_home():
 
 def header_dashboard():
 
-    logo_url = "Link Here"
+    logo_url = "https://i.ibb.co/0jpP8MjJ/Speak-Wise-Logo-front.png"
     
     st.markdown(f"""
         <div style="display:flex; align-items:center; justify-content:center; gap:10px">
