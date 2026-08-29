@@ -26,5 +26,4 @@ def login_screen():
             if st.button("Sign up", type="secondary"):
                 st.session_state.screen = "signup"
                 st.rerun()
-
         footer_dashboard()
