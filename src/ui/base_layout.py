@@ -18,15 +18,31 @@ def style_base_layout():
 
         #MainMenu, footer, header { visibility: hidden; }
 
-        button {
-            background-color: #2F7D5C !important;
-            color: white !important;
-            border-radius: 10px !important;
-            border: none !important;
-        }
-        button:hover {
+        div.stButton > button[kind="primary"] {
+        background-color: #2F7D5C !important;
+        color: white !important;
+        border-radius: 10px !important;
+        border: none !important;
+    }
+
+    div.stButton > button[kind="secondary"] {
+        background-color: transparent !important;
+        color: #2F7D5C !important;
+        border: 1.5px solid #2F7D5C !important;
+        border-radius: 10px !important;
+    }
+
+    div.stButton > button[kind="tertiary"] {
+        background-color: transparent !important;
+        color: #1F2A1F !important;
+        border: none !important;
+        text-decoration: underline !important;
+    }
+
+    div.stButton > button:hover {
         transform: scale(1.05) !important;
         transition: transform 0.2s ease-in-out !important;
+    }
 }
         </style>
     """, unsafe_allow_html=True)
