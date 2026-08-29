@@ -8,7 +8,11 @@ def signup_dialog():
         name = st.text_input("Enter yout name")
         username = st.text_input("Create Username")
         email = st.text_input("Enter Email")
-        password = st.text_input("Enter Password")
+        password = st.text_input("Enter Password", type="password")
         if st.button("Submit", type="primary"):
-            signup_user(name, username, email, password)
-            
+            success, message = signup_user(name, username, email, password)
+            if success:
+                st.success(message)
+            else:
+                st.error(message)
+                        
