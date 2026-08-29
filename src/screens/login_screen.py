@@ -1,6 +1,6 @@
 import streamlit as st
 from src.components.dialog_signup import signup_dialog
-from src.components.footer import footer_home
+from src.components.footer import footer_dashboard
 
 
 def login_screen():
@@ -24,5 +24,5 @@ def login_screen():
                 st.session_state.screen = "signup"
                 st.rerun()
                 
-        footer_home()
+        footer_dashboard()
         
