@@ -24,5 +24,4 @@ def main():
         login_screen()
     elif st.session_state.screen == "signup":
         signup_dialog()
-        
 main()
