@@ -3,6 +3,7 @@ import streamlit as st
 from src.screens.login_screen import login_screen
 from src.components.dialog_signup import signup_dialog
 from src.components.header import header_home
+from src.components.footer import footer_dashboard
 from src.ui.base_layout import style_background_home ,  style_base_layout
 
 def main():
@@ -16,9 +17,11 @@ def main():
         header_home()
         st.header("Your Personalized English Tutor")
         
+        
         if st.button("Start"):
             st.session_state.screen = "login"
             st.rerun()
+        footer_dashboard()
 
     elif st.session_state.screen == "login":
         login_screen()
