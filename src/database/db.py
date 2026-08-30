@@ -26,6 +26,7 @@ def login_user(username, password):
         if response.data:
             user = response.data[0]
             if check_pass(password, user["password"]):
-                return user
+                return True, user
+        return False, "Incorrect username or password"
     except Exception as e:
-            return False, "Wrong username or password!"
+        return False, "Something went wrong, please try again"
