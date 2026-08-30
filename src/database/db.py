@@ -14,3 +14,16 @@ def signup_user(name, username, email, password):
         return True, "Signup successful"
     except Exception as e:
         return False, "Username or email already exists"
+    
+# Function to check password in login process
+def check_pass(pwd, hashed):
+    return bcrypt.checkpw(pwd.encode(), hashed.encode())
+    
+# function for user login
+def login_user(username, password):
+    response = supabase.table("users").select("*").eq("username", username).execute()
+    if response.data:
+        user = response.data[0]
+        if check_pass(password, user["password"]):
+            return user
+    return None
