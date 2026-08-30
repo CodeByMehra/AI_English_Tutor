@@ -21,9 +21,11 @@ def check_pass(pwd, hashed):
     
 # function for user login
 def login_user(username, password):
-    response = supabase.table("users").select("*").eq("username", username).execute()
-    if response.data:
-        user = response.data[0]
-        if check_pass(password, user["password"]):
-            return user
-    return None 
+    try:
+        response = supabase.table("users").select("*").eq("username", username).execute()
+        if response.data:
+            user = response.data[0]
+            if check_pass(password, user["password"]):
+                return user
+    except Exception as e:
+            return False, "Wrong username or password!"
