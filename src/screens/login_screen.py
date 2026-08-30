@@ -1,6 +1,7 @@
 import streamlit as st
 from src.components.dialog_signup import signup_dialog
 from src.components.footer import footer_dashboard
+from src.database.db import login_user
 
 
 def login_screen():
@@ -20,7 +21,12 @@ def login_screen():
             password = st.text_input("Enter Password", type="password")
 
             if st.button("Log in", type="primary"):
-                st.write("Login logic goes here")
+                if st.button("Log in", type="primary"):
+                    success, result = login_user(username, password)
+                    if success:
+                        st.success("Logged in successfully!")
+                    else:
+                        st.error(result)
 
             st.text("Dont have an account?")
             if st.button("Sign up", type="secondary"):
