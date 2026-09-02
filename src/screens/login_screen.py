@@ -26,6 +26,7 @@ def login_screen():
                     st.success("Logged in successfully!")
                     st.session_state.user = result # to store the user data in session state.
                     st.session_state.screen = "userscreen"
+                    st.rerun()
                 else:
                     st.error(result)
 
