@@ -24,6 +24,7 @@ def login_screen():
                 success, result = login_user(username, password)
                 if success:
                     st.success("Logged in successfully!")
+                    st.session_state.user = result # to store the user data in session state.
                     st.session_state.screen = "userscreen"
                 else:
                     st.error(result)
