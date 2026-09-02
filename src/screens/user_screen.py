@@ -1,7 +1,46 @@
 import streamlit as st
+from src.components.header import header_dashboard
+from src.components.footer import footer_dashboard
+
 
 def user_screen():
-    if "userscreen" not in st.session_state.screen:
-            st.session_state.screen = "userscreen"
-    
-        if st.session_state.screen == "userscreen":
+    if st.session_state.screen == "userscreen":
+
+        nav_col1, nav_col2 = st.columns([4, 1])
+
+        with nav_col1:
+            header_dashboard()
+
+        with nav_col2:
+            st.write("")  # small vertical spacer to align button with logo
+            if st.button("Log out", type="tertiary"):
+                del st.session_state.user
+                st.session_state.screen = "login"
+                st.rerun()
+
+        st.markdown("<hr style='margin-top:0; margin-bottom:24px; border-color:#DCE8F5;'>", unsafe_allow_html=True)
+
+        user = st.session_state.user
+
+        st.markdown(f"""
+            <div style="text-align:center; margin-bottom:36px;">
+                <h1 style="color:#1B2A33; font-weight:700; margin-bottom:6px;">
+                    Welcome back, {user['name']}
+                </h1>
+                <p style="color:#5B7185; font-size:16px;">
+                    Ready to practice your English today?
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+            <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
+                        max-width:480px; margin:0 auto; box-shadow:0 4px 20px rgba(37,99,235,0.08);">
+                <p style="color:#6B7A90; font-size:14px; margin-bottom:16px;">Your practice space</p>
+                <p style="color:#1B2A33; font-size:15px;">
+                    Speaking practice and feedback features are coming soon.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        footer_dashboard()
