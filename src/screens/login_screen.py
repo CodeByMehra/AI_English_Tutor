@@ -21,13 +21,12 @@ def login_screen():
             password = st.text_input("Enter Password", type="password")
 
             if st.button("Log in", type="primary"):
-                if st.button("Log in", type="primary"):
-                    success, result = login_user(username, password)
-                    if success:
-                        st.success("Logged in successfully!")
-                        st.session_state.screen = "login"
-                    else:
-                        st.error(result)
+                success, result = login_user(username, password)
+                if success:
+                    st.success("Logged in successfully!")
+                    st.session_state.screen = "userscreen"
+                else:
+                    st.error(result)
 
             st.text("Dont have an account?")
             if st.button("Sign up", type="secondary"):
