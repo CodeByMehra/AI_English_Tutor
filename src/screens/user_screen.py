@@ -33,7 +33,7 @@ def user_screen():
             </div>
         """, unsafe_allow_html=True)
         
-        audio = st.audio_input("Record your practice") # testing line
+        audio = st.audio_input("Record your practice") # testing line 
 
         st.markdown("""
             <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
