@@ -30,4 +30,4 @@ def main():
         signup_dialog()
     elif st.session_state.screen == "userscreen":
         user_screen()
-main()
+main() 
