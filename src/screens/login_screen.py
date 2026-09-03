@@ -5,8 +5,6 @@ from src.database.db import login_user
 
 
 def login_screen():
-    if "login" not in st.session_state.screen:
-        st.session_state.screen = "login"
 
     if st.session_state.screen == "login":
 
