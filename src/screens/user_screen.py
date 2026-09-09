@@ -66,6 +66,13 @@ def user_screen():
         else:
             if "last_transcript" in st.session_state:
                 st.markdown(f"**Your Transcript:**\n\n> {st.session_state.last_transcript}")
+                st.markdown(f"""
+                    **Grammar:** {feedback['grammar_score']}/10 — {feedback['grammar_feedback']}
+
+                    **Fluency:** {feedback['fluency_score']}/10 — {feedback['fluency_feedback']}
+
+                    **Tip:** {feedback['suggestion']}
+                """)
             else:
                 st.markdown("""
                     <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
