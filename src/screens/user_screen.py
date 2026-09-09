@@ -58,14 +58,17 @@ def user_screen():
                     if os.path.exists(tmp_path):
                         os.remove(tmp_path)
         else:
-            st.markdown("""
-                <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
-                            max-width:480px; margin:0 auto; box-shadow:0 4px 20px rgba(37,99,235,0.08);">
-                    <p style="color:#6B7A90; font-size:14px; margin-bottom:16px;">Your practice space</p>
-                    <p style="color:#1B2A33; font-size:15px;">
-                        Speaking practice and feedback features are coming soon.
-                    </p>
-                </div>
-            """, unsafe_allow_html=True)
+            if "last_transcript" in st.session_state:
+                st.markdown(f"**Your Transcript:**\n\n> {st.session_state.last_transcript}")
+            else:
+                st.markdown("""
+                    <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
+                                max-width:480px; margin:0 auto; box-shadow:0 4px 20px rgba(37,99,235,0.08);">
+                        <p style="color:#6B7A90; font-size:14px; margin-bottom:16px;">Your practice space</p>
+                        <p style="color:#1B2A33; font-size:15px;">
+                            Speaking practice and feedback features are coming soon.
+                        </p>
+                    </div>
+                """, unsafe_allow_html=True)
 
         footer_dashboard()
