@@ -1,7 +1,6 @@
 import streamlit as st
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
-
 from src.services.feedback import get_feedback
 
 
@@ -34,9 +33,11 @@ def user_screen():
                 </p>
             </div>
         """, unsafe_allow_html=True)
+
         if "last_audio" not in st.session_state:
             st.session_state.last_audio = None
-        audio = st.audio_input("Record your practice") # testing line 
+
+        audio = st.audio_input("Record your practice")
 
         if audio and audio.getvalue() != st.session_state.last_audio:
             import tempfile
@@ -54,10 +55,18 @@ def user_screen():
                     st.markdown(f"**Your Transcript:**\n\n> {transcript}")
                     st.session_state.last_audio = audio.getvalue()
                     st.session_state.last_transcript = transcript
-                    
+
                     with st.spinner("Generating feedback..."):
                         feedback = get_feedback(transcript)
                         st.session_state.last_feedback = feedback
+
+                    st.markdown(f"""
+                        **Grammar:** {feedback['grammar_score']}/10 — {feedback['grammar_feedback']}
+
+                        **Fluency:** {feedback['fluency_score']}/10 — {feedback['fluency_feedback']}
+
+                        **Tip:** {feedback['suggestion']}
+                    """)
                 except Exception as e:
                     st.error(f"Error transcribing audio: {e}")
                 finally:
@@ -67,11 +76,11 @@ def user_screen():
             if "last_transcript" in st.session_state:
                 st.markdown(f"**Your Transcript:**\n\n> {st.session_state.last_transcript}")
                 st.markdown(f"""
-                    **Grammar:** {feedback['grammar_score']}/10 — {feedback['grammar_feedback']}
+                    **Grammar:** {st.session_state.last_feedback['grammar_score']}/10 — {st.session_state.last_feedback['grammar_feedback']}
 
-                    **Fluency:** {feedback['fluency_score']}/10 — {feedback['fluency_feedback']}
+                    **Fluency:** {st.session_state.last_feedback['fluency_score']}/10 — {st.session_state.last_feedback['fluency_feedback']}
 
-                    **Tip:** {feedback['suggestion']}
+                    **Tip:** {st.session_state.last_feedback['suggestion']}
                 """)
             else:
                 st.markdown("""
