@@ -11,7 +11,7 @@ def login_screen():
         col1, col2 = st.columns(2)
 
         with col1:
-            st.image("https://i.ibb.co/gZQr6T6k/login-illustration.png", use_container_width=True)
+            st.image("https://i.ibb.co/gZQr6T6k/login-illustration.png", width=True)
 
         with col2:
             st.header("Login")
