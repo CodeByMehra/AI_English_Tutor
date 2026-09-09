@@ -36,7 +36,7 @@ def user_screen():
             st.session_state.last_audio = None
         audio = st.audio_input("Record your practice") # testing line 
 
-        if audio:
+        if audio and audio.getvalue() != st.session_state.last_audio:
             import tempfile
             import os
             from src.services.transcription import transcribe_audio
@@ -50,6 +50,8 @@ def user_screen():
                     transcript = transcribe_audio(tmp_path)
                     st.success("Transcription Complete!")
                     st.markdown(f"**Your Transcript:**\n\n> {transcript}")
+                    st.session_state.last_audio = audio.getvalue()
+                    st.session_state.last_transcript = transcript
                 except Exception as e:
                     st.error(f"Error transcribing audio: {e}")
                 finally:
