@@ -2,6 +2,8 @@ import streamlit as st
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
 
+from src.services.feedback import get_feedback
+
 
 def user_screen():
     if st.session_state.screen == "userscreen":
@@ -52,6 +54,10 @@ def user_screen():
                     st.markdown(f"**Your Transcript:**\n\n> {transcript}")
                     st.session_state.last_audio = audio.getvalue()
                     st.session_state.last_transcript = transcript
+                    
+                    with st.spinner("Generating feedback..."):
+                        feedback = get_feedback(transcript)
+                        st.session_state.last_feedback = feedback
                 except Exception as e:
                     st.error(f"Error transcribing audio: {e}")
                 finally:
