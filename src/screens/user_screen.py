@@ -32,7 +32,8 @@ def user_screen():
                 </p>
             </div>
         """, unsafe_allow_html=True)
-        
+        if "last_audio" not in st.session_state:
+            st.session_state.last_audio = None
         audio = st.audio_input("Record your practice") # testing line 
 
         if audio:
