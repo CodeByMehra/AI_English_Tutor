@@ -27,4 +27,4 @@ Respond ONLY with valid JSON in this exact format, no other text:
     if raw_text.startswith("```"):
         raw_text = raw_text.split("```")[1].replace("json", "", 1).strip()
 
-    return json.loads(raw_text)
+    return json.loads(raw_text) 
