@@ -93,4 +93,4 @@ def user_screen():
                     </div>
                 """, unsafe_allow_html=True)
 
-        footer_dashboard() 
+        footer_dashboard()
