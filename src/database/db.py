@@ -47,3 +47,12 @@ def save_session(user_id, transcript, feedback):
         return True, "Session saved"
     except Exception as e:
         return False, "Could not save session"
+    
+# function to fetch user info
+
+def get_user_sessions(user_id):
+    try:
+        response = supabase.table("sessions").select("*").eq("user_id", user_id).order("created_at", desc=True).execute()
+        return response.data
+    except Exception as e:
+        return []
