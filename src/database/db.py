@@ -30,3 +30,20 @@ def login_user(username, password):
         return False, "Incorrect username or password"
     except Exception as e:
         return False, "Something went wrong, please try again"
+    
+    
+# Save sessions
+def save_session(user_id, transcript, feedback):
+    try:
+        supabase.table("sessions").insert({
+            "user_id": user_id,
+            "transcript": transcript,
+            "grammar_score": feedback["grammar_score"],
+            "fluency_score": feedback["fluency_score"],
+            "grammar_feedback": feedback["grammar_feedback"],
+            "fluency_feedback": feedback["fluency_feedback"],
+            "suggestion": feedback["suggestion"],
+        }).execute()
+        return True, "Session saved"
+    except Exception as e:
+        return False, "Could not save session"
