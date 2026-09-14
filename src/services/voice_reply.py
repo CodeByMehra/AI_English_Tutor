@@ -5,8 +5,8 @@ client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 def synthesize_speech(text, output_path="reply.wav"):
     response = client.audio.speech.create(
-        model="playai-tts",
-        voice="Fritz-PlayAI",
+        model="canopylabs/orpheus-v1-english",
+        voice="troy",
         input=text,
         response_format="wav"
     )
