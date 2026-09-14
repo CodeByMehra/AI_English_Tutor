@@ -36,6 +36,9 @@ def user_screen():
 
         with nav_col2:
             st.write("")
+            if st.button("Start Live Conversation", type="secondary"):
+                st.session_state.screen = "conversation"
+                st.rerun()
             if st.button("Log out", type="tertiary"):
                 del st.session_state.user
                 st.session_state.screen = "login"
