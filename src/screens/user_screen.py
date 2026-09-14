@@ -2,6 +2,28 @@ import streamlit as st
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
 from src.services.feedback import get_feedback
+from src.database.db import get_user_sessions, save_session
+
+
+def render_feedback_card(transcript, feedback):
+    st.markdown(f"""
+        <div style="background:#EFF5FC; border-radius:16px; padding:28px;
+                    max-width:560px; margin:20px auto; box-shadow:0 4px 20px rgba(37,99,235,0.08);">
+            <p style="color:#1B2A33; font-size:15px; margin-bottom:16px;">
+                <strong>Your Transcript:</strong><br/>{transcript}
+            </p>
+            <hr style="border-color:#D6E6F7; margin:16px 0;">
+            <p style="color:#1B2A33; font-size:15px; margin-bottom:8px;">
+                <strong>Grammar:</strong> {feedback['grammar_score']}/10 — {feedback['grammar_feedback']}
+            </p>
+            <p style="color:#1B2A33; font-size:15px; margin-bottom:8px;">
+                <strong>Fluency:</strong> {feedback['fluency_score']}/10 — {feedback['fluency_feedback']}
+            </p>
+            <p style="color:#1B2A33; font-size:15px;">
+                <strong>Tip:</strong> {feedback['suggestion']}
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
 
 
 def user_screen():
@@ -13,7 +35,7 @@ def user_screen():
             header_dashboard()
 
         with nav_col2:
-            st.write("")  # small vertical spacer to align button with logo
+            st.write("")
             if st.button("Log out", type="tertiary"):
                 del st.session_state.user
                 st.session_state.screen = "login"
@@ -51,8 +73,6 @@ def user_screen():
             with st.spinner("Transcribing..."):
                 try:
                     transcript = transcribe_audio(tmp_path)
-                    st.success("Transcription Complete!")
-                    st.markdown(f"**Your Transcript:**\n\n> {transcript}")
                     st.session_state.last_audio = audio.getvalue()
                     st.session_state.last_transcript = transcript
 
@@ -60,13 +80,9 @@ def user_screen():
                         feedback = get_feedback(transcript)
                         st.session_state.last_feedback = feedback
 
-                    st.markdown(f"""
-                        **Grammar:** {feedback['grammar_score']}/10 — {feedback['grammar_feedback']}
+                    render_feedback_card(transcript, feedback)
+                    save_session(user["user_id"], transcript, feedback)
 
-                        **Fluency:** {feedback['fluency_score']}/10 — {feedback['fluency_feedback']}
-
-                        **Tip:** {feedback['suggestion']}
-                    """)
                 except Exception as e:
                     st.error(f"Error transcribing audio: {e}")
                 finally:
@@ -74,17 +90,10 @@ def user_screen():
                         os.remove(tmp_path)
         else:
             if "last_transcript" in st.session_state:
-                st.markdown(f"**Your Transcript:**\n\n> {st.session_state.last_transcript}")
-                st.markdown(f"""
-                    **Grammar:** {st.session_state.last_feedback['grammar_score']}/10 — {st.session_state.last_feedback['grammar_feedback']}
-
-                    **Fluency:** {st.session_state.last_feedback['fluency_score']}/10 — {st.session_state.last_feedback['fluency_feedback']}
-
-                    **Tip:** {st.session_state.last_feedback['suggestion']}
-                """)
+                render_feedback_card(st.session_state.last_transcript, st.session_state.last_feedback)
             else:
                 st.markdown("""
-                    <div style="background:#FFFFFF; border-radius:16px; padding:40px; text-align:center;
+                    <div style="background:#EFF5FC; border-radius:16px; padding:40px; text-align:center;
                                 max-width:480px; margin:0 auto; box-shadow:0 4px 20px rgba(37,99,235,0.08);">
                         <p style="color:#6B7A90; font-size:14px; margin-bottom:16px;">Your practice space</p>
                         <p style="color:#1B2A33; font-size:15px;">
@@ -92,5 +101,20 @@ def user_screen():
                         </p>
                     </div>
                 """, unsafe_allow_html=True)
+
+        st.markdown("---")
+        st.subheader("Your Practice History")
+
+        sessions = get_user_sessions(user["user_id"])
+
+        if sessions:
+            for s in sessions:
+                with st.expander(f"{s['created_at'][:10]} — Grammar: {s['grammar_score']}/10, Fluency: {s['fluency_score']}/10"):
+                    st.markdown(f"**Transcript:** {s['transcript']}")
+                    st.markdown(f"**Grammar feedback:** {s['grammar_feedback']}")
+                    st.markdown(f"**Fluency feedback:** {s['fluency_feedback']}")
+                    st.markdown(f"**Tip:** {s['suggestion']}")
+        else:
+            st.caption("No practice sessions yet — record something above to get started.")
 
         footer_dashboard()
