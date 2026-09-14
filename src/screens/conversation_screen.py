@@ -27,6 +27,9 @@ def conversation_screen():
         speaker = "You" if turn["role"] == "user" else "SpeakWise"
         st.markdown(f"**{speaker}:** {turn['text']}")
 
+    if "last_ai_audio" in st.session_state:
+        st.audio(st.session_state.last_ai_audio)
+
     audio = st.audio_input("Speak your turn")
 
     if audio and audio.getvalue() != st.session_state.last_conv_audio:
@@ -44,12 +47,10 @@ def conversation_screen():
             with st.spinner("Thinking..."):
                 ai_text = get_ai_reply(st.session_state.conversation)
                 st.session_state.conversation.append({"role": "ai", "text": ai_text})
-                st.write(f"AI text received: {ai_text}")
 
             with st.spinner("Speaking..."):
                 audio_path = synthesize_speech(ai_text)
-                st.write(f"File exists: {os.path.exists(audio_path)}, size: {os.path.getsize(audio_path) if os.path.exists(audio_path) else 'N/A'}")
-                st.audio(audio_path)
+                st.session_state.last_ai_audio = audio_path
 
             st.rerun()
 
@@ -62,6 +63,8 @@ def conversation_screen():
     if st.button("Reset conversation", type="tertiary"):
         st.session_state.conversation = []
         st.session_state.last_conv_audio = None
+        if "last_ai_audio" in st.session_state:
+            del st.session_state.last_ai_audio
         st.rerun()
 
     footer_dashboard()
