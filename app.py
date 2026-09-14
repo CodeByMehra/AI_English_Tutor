@@ -7,6 +7,8 @@ from src.components.header import header_home
 from src.components.footer import footer_home
 from src.ui.base_layout import style_background_home ,  style_base_layout
 
+from src.screens.conversation_screen import conversation_screen
+
 def main():
     style_background_home()
     style_base_layout()
@@ -30,4 +32,6 @@ def main():
         signup_dialog()
     elif st.session_state.screen == "userscreen": 
         user_screen()
+    elif st.session_state.screen == "conversation":
+        conversation_screen()
 main()
