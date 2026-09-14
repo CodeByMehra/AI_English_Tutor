@@ -14,6 +14,7 @@ def style_base_layout():
 
         html, body, p, span, div, label, input, button {
             font-family: 'Outfit', sans-serif !important;
+            color: #1B2A33 !important;
         }
 
         #MainMenu, footer, header { visibility: hidden; }
