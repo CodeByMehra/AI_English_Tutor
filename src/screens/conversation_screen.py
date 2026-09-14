@@ -44,9 +44,11 @@ def conversation_screen():
             with st.spinner("Thinking..."):
                 ai_text = get_ai_reply(st.session_state.conversation)
                 st.session_state.conversation.append({"role": "ai", "text": ai_text})
+                st.write(f"AI text received: {ai_text}")
 
             with st.spinner("Speaking..."):
                 audio_path = synthesize_speech(ai_text)
+                st.write(f"File exists: {os.path.exists(audio_path)}, size: {os.path.getsize(audio_path) if os.path.exists(audio_path) else 'N/A'}")
                 st.audio(audio_path)
 
             st.rerun()
