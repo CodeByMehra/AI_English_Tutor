@@ -27,7 +27,7 @@ def style_base_layout():
 
     div.stButton > button[kind="secondary"] {
         background-color: transparent !important;
-        color: #2F7D5C !important;
+        color: #2F7D5C !important; 
         border: 1.5px solid #2F7D5C !important;
         border-radius: 10px !important;
     }
