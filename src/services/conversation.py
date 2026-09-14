@@ -19,4 +19,4 @@ Reply as the AI partner:"""
         model="gemini-2.0-flash",
         contents=prompt
     )
-    return response.text.strip()
+    return response.text.strip() 
