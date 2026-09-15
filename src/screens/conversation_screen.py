@@ -30,7 +30,7 @@ def conversation_screen():
     if "last_ai_audio" in st.session_state:
         st.audio(st.session_state.last_ai_audio)
 
-    audio = st.audio_input("Speak your turn")
+    audio = st.audio_input("Speak your turn") 
 
     if audio and audio.getvalue() != st.session_state.last_conv_audio:
         st.session_state.last_conv_audio = audio.getvalue()
