@@ -106,18 +106,21 @@ def user_screen():
                 """, unsafe_allow_html=True)
 
         st.markdown("---")
-        st.subheader("Your Practice History")
 
-        sessions = get_user_sessions(user["user_id"])
+        history_col1, history_col2, history_col3 = st.columns([1, 4, 1])
+        with history_col2:
+            st.subheader("Your Practice History")
 
-        if sessions:
-            for s in sessions:
-                with st.expander(f"{s['created_at'][:10]} — Grammar: {s['grammar_score']}/10, Fluency: {s['fluency_score']}/10"):
-                    st.markdown(f"**Transcript:** {s['transcript']}")
-                    st.markdown(f"**Grammar feedback:** {s['grammar_feedback']}")
-                    st.markdown(f"**Fluency feedback:** {s['fluency_feedback']}")
-                    st.markdown(f"**Tip:** {s['suggestion']}")
-        else:
-            st.caption("No practice sessions yet — record something above to get started.")
+            sessions = get_user_sessions(user["user_id"])
+
+            if sessions:
+                for s in sessions:
+                    with st.expander(f"{s['created_at'][:10]} — Grammar: {s['grammar_score']}/10, Fluency: {s['fluency_score']}/10"):
+                        st.markdown(f"**Transcript:** {s['transcript']}")
+                        st.markdown(f"**Grammar feedback:** {s['grammar_feedback']}")
+                        st.markdown(f"**Fluency feedback:** {s['fluency_feedback']}")
+                        st.markdown(f"**Tip:** {s['suggestion']}")
+            else:
+                st.caption("No practice sessions yet — record something above to get started.")
 
         footer_dashboard()
