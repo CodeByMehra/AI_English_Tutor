@@ -19,7 +19,7 @@ Respond ONLY with valid JSON in this exact format, no other text:
 }}"""
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.6-flash",
         contents=prompt
     )
 

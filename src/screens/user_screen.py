@@ -92,7 +92,7 @@ def user_screen():
                     if os.path.exists(tmp_path):
                         os.remove(tmp_path)
         else:
-            if "last_transcript" in st.session_state:
+            if "last_transcript" in st.session_state and "last_feedback" in st.session_state:
                 render_feedback_card(st.session_state.last_transcript, st.session_state.last_feedback)
             else:
                 st.markdown("""
