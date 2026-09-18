@@ -1,6 +1,10 @@
 from src.database.config import supabase
+import bcrypt
 
-import bcrypt 
+
+def check_pass(pwd, hashed):
+    return bcrypt.checkpw(pwd.encode(), hashed.encode())
+
 
 def signup_user(name, username, email, password):
     hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -14,12 +18,8 @@ def signup_user(name, username, email, password):
         return True, "Signup successful"
     except Exception as e:
         return False, "Username or email already exists"
-    
-# Function to check password in login process
-def check_pass(pwd, hashed):
-    return bcrypt.checkpw(pwd.encode(), hashed.encode())
-    
-# function for user login
+
+
 def login_user(username, password):
     try:
         response = supabase.table("users").select("*").eq("username", username).execute()
@@ -30,9 +30,8 @@ def login_user(username, password):
         return False, "Incorrect username or password"
     except Exception as e:
         return False, "Something went wrong, please try again"
-    
-    
-# Save sessions
+
+
 def save_session(user_id, transcript, feedback):
     try:
         supabase.table("sessions").insert({
@@ -47,8 +46,7 @@ def save_session(user_id, transcript, feedback):
         return True, "Session saved"
     except Exception as e:
         return False, "Could not save session"
-    
-# function to fetch user info
+
 
 def get_user_sessions(user_id):
     try:

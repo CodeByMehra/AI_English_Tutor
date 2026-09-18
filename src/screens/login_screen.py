@@ -5,13 +5,15 @@ from src.database.db import login_user
 
 
 def login_screen():
+    if "login" not in st.session_state.screen:
+        st.session_state.screen = "login"
 
     if st.session_state.screen == "login":
 
         col1, col2 = st.columns(2)
 
         with col1:
-            st.image("https://i.ibb.co/gZQr6T6k/login-illustration.png", width='stretch')
+            st.image("https://i.ibb.co/gZQr6T6k/login-illustration.png", use_container_width=True)
 
         with col2:
             st.header("Login")
@@ -22,7 +24,7 @@ def login_screen():
                 success, result = login_user(username, password)
                 if success:
                     st.success("Logged in successfully!")
-                    st.session_state.user = result # to store the user data in session state.
+                    st.session_state.user = result
                     st.session_state.screen = "userscreen"
                     st.rerun()
                 else:
@@ -32,4 +34,7 @@ def login_screen():
             if st.button("Sign up", type="secondary"):
                 st.session_state.screen = "signup"
                 st.rerun()
-        footer_dashboard() 
+        footer_dashboard()
+
+    elif st.session_state.screen == "signup":
+        signup_dialog()

@@ -1,6 +1,9 @@
 import streamlit as st
+import tempfile
+import os
 from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
+from src.services.transcription import transcribe_audio
 from src.services.feedback import get_feedback
 from src.database.db import get_user_sessions, save_session
 
@@ -65,9 +68,6 @@ def user_screen():
         audio = st.audio_input("Record your practice")
 
         if audio and audio.getvalue() != st.session_state.last_audio:
-            import tempfile
-            import os
-            from src.services.transcription import transcribe_audio
 
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
                 tmp_file.write(audio.getvalue())
