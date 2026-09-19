@@ -22,7 +22,7 @@ def get_progress_insight(sessions):
 In 2-3 short sentences, identify any recurring pattern or repeated mistake across these sessions, and give one focused thing to work on this week. If there's no clear pattern, say they're progressing well and encourage them to keep practicing varied topics. Be specific and encouraging, not generic."""
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-3.6-flash",
         contents=prompt
     )
     return response.text.strip()
