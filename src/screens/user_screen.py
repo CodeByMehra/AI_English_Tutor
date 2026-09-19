@@ -5,6 +5,7 @@ from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
 from src.services.transcription import transcribe_audio
 from src.services.feedback import get_feedback
+from src.services.insights import get_progress_insight
 from src.database.db import get_user_sessions, save_session
 
 
@@ -109,9 +110,28 @@ def user_screen():
 
         history_col1, history_col2, history_col3 = st.columns([1, 4, 1])
         with history_col2:
-            st.subheader("Your Practice History")
-
             sessions = get_user_sessions(user["user_id"])
+
+            if sessions:
+                st.subheader("Your Progress")
+
+                chart_data = sessions[::-1]
+                st.line_chart({
+                    "Grammar": [s["grammar_score"] for s in chart_data],
+                    "Fluency": [s["fluency_score"] for s in chart_data],
+                })
+
+                with st.spinner("Analyzing your recent sessions..."):
+                    insight = get_progress_insight(sessions)
+
+                st.markdown(f"""
+                    <div style="background:#EFF5FC; border-radius:14px; padding:20px; margin-bottom:24px;">
+                        <p style="color:#1B2A33; font-size:14px; margin-bottom:6px;"><strong>What to focus on:</strong></p>
+                        <p style="color:#1B2A33; font-size:14px; margin:0;">{insight}</p>
+                    </div>
+                """, unsafe_allow_html=True)
+
+            st.subheader("Your Practice History")
 
             if sessions:
                 for s in sessions:
